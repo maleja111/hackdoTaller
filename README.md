@@ -3,24 +3,24 @@
 En este taller, tendremos la oportunidad de dar continuación a el taller de backend en Node, 
 utilizaremos las API que se desarrollaron y las integraremos a nuestro proyecto
 
-##Requerimientos
-debemos tener node instalado
-angular cli
-se recomienda mvn
+## Requerimientos
 
-##Instalación angular cli
-verificar la versión con `ng -v`
-instalación `npm install -g @angular/cli`
+Debemos tener node instalado
+- Node
+- Angular Cli
 
-#Pasos de creación
-Crear el proyecto `ng new my-proyecto-angular`
+## Instalación angular cli
+- Verificar la versión con `ng -v`
+- Instalación `npm install -g @angular/cli`
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Ejecución del proyecto
+- Instalar npm modules `npm i` esto se hace solo 1 vez
+- Ejecutar `ng serve` e ir a `http://localhost:4200/`
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+## Pasos de creación
+- Crear el proyecto `ng new my-proyecto-name`
+- Crear componente `ng generate component my-component-name`
+- Crear directiva `ng generate directive my-directive-name`
 
 ## Build
 

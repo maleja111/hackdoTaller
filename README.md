@@ -13,14 +13,29 @@ Debemos tener node instalado
 - Verificar la versión con `ng -v`
 - Instalación `npm install -g @angular/cli`
 
+## Pasos de creación
+- Crear el proyecto `ng new hackdoTaller`
+
 ## Ejecución del proyecto
 - Instalar npm modules `npm i` esto se hace solo 1 vez
 - Ejecutar `ng serve` e ir a `http://localhost:4200/`
 
-## Pasos de creación
-- Crear el proyecto `ng new my-proyecto-name`
-- Crear componente `ng generate component my-component-name`
-- Crear directiva `ng generate directive my-directive-name`
+## Pasos
+- Vamos a adicionar `ReactiveFormsModule` en `app.module.ts` de `import { ReactiveFormsModule } from '@angular/forms'`
+- Adicionamos main.ts con boostrap
+`import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';`
+`import { AppModule } from './app.module';`
+`platformBrowserDynamic().bootstrapModule(AppModule);`
+
+- Creamos nuestro nuevo componente para subir archivos `ng generate component uploadFile`
+- Creamos nuestro formulario reactivo
+- Generamos nuestro servicio `ng generate service uploadFile`
+
+## Notas
+- Si no te funciona la libreria de Rxjs usar `npm install rxjs@6 rxjs-compat@6 --save`
+- Si tienes problemas con el Http,  usar en imports `import { HttpModule } from '@angular/http';` en `app.module.ts`
+- 
+
 
 ## Build
 

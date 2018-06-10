@@ -13,6 +13,7 @@ export class UploadFileComponent implements OnInit {
 
   form: FormGroup;
   loading = false;
+  idImage = '';
   @ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
@@ -27,38 +28,39 @@ export class UploadFileComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      description: ['', Validators.required],
       avatar: null
     });
   }
 
   onFileChange(event) {
-    // if (event.target.files.length > 0) {
-    // const file = event.target.files[0];
-    // this.uploadFileService
-    //   .saveImage(file)
-    //   .subscribe((data) => {
-    //     console.log(data);
-    //   });
     this.uploadFile(event.target.files);
-    // this.form.get('avatar').setValue(file);
-    // }
   }
 
   onSubmit() {
-    const formModel = this.form.value;
     this.loading = true;
-    // In a real-world app you'd have a http request / service call here like
-    // this.http.post('apiUrl', formModel)
-    setTimeout(() => {
-      console.log(formModel);
-      alert('done!');
-      this.loading = false;
-    }, 1000);
+    if (this.idImage !== '') {
+      this.form.get('avatar').setValue(this.idImage);
+      const formModel = this.form.value;
+      this.uploadFileService.addDescription('https://picx-api.now.sh/media', formModel)
+        .subscribe(
+          event => {
+            if (event instanceof HttpResponse) {
+              console.log('Descripción almacenada correctamente');
+            }
+          },
+          (err) => {
+            console.log('Saved with Error:', err);
+          }, () => {
+            console.log('Upload done');
+          }
+        );
+    } else {
+      alert('Por favor Adjunta una Imagen!');
+    }
   }
 
   clearFile() {
-    // this.uploadFileService.create('1', '1', '1');
     this.form.get('avatar').setValue(null);
     this.fileInput.nativeElement.value = '';
   }
@@ -73,11 +75,10 @@ export class UploadFileComponent implements OnInit {
     this.uploadFileService.uploadFile('https://picx-api.now.sh/image/upload', img)
       .subscribe(
         event => {
-          if (event.type === HttpEventType.UploadProgress) {
-            const percentDone = Math.round(100 * event.loaded / event.total);
-            console.log(`File is ${percentDone}% loaded.`);
-          } else if (event instanceof HttpResponse) {
-            console.log('File is completely loaded!');
+          this.idImage = '';
+          if (event instanceof HttpResponse && event.body._id) {
+            this.idImage = event.body._id;
+            console.log('File is completely loaded! and the image have the Id: ', this.idImage);
           }
         },
         (err) => {

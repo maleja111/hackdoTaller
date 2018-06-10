@@ -26,18 +26,7 @@ export class UploadFileService {
   }
 
   addDescription(url: string, data: any): Observable<any> {
-
-    const formData = new FormData();
-    formData.append('description', data.description);
-    formData.append('image', data.avatar);
     const dataPost = { description: data.description, image: data.avatar };
-
-    const params = new HttpParams();
-
-    const options = {
-      params: params,
-      reportProgress: true,
-    };
 
     const req = new HttpRequest('POST', url, dataPost);
     return this.http.request(req);
